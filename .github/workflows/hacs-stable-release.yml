@@ -1,0 +1,53 @@
+name: HACS stable release
+
+on:
+  workflow_call:
+    inputs:
+      manifest_path:
+        required: true
+        type: string
+      tag:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: startsWith(inputs.tag, 'v') && !contains(inputs.tag, '-')
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+
+      - name: Verify stable tag and manifest
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          MANIFEST_PATH: ${{ inputs.manifest_path }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, sys
+          tag = os.environ["RELEASE_TAG"]
+          if "-" in tag or not tag.startswith("v"):
+              raise SystemExit("only stable vX.Y.Z tags are accepted")
+          path = pathlib.Path(os.environ["MANIFEST_PATH"])
+          version = json.loads(path.read_text(encoding="utf-8"))["version"]
+          if version != tag[1:]:
+              raise SystemExit(f"manifest {version!r} does not match {tag!r}")
+          print(f"verified stable manifest {version}")
+          PY
+
+      - name: Create or verify normal release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release view "$RELEASE_TAG" --json isDraft,isPrerelease,tagName
+          else
+            gh release create "$RELEASE_TAG" --verify-tag --title "$RELEASE_TAG" --generate-notes
+          fi
+          gh release view "$RELEASE_TAG" --json isDraft,isPrerelease,tagName --jq 'if .isDraft or .isPrerelease then error("release must be normal") else . end'
