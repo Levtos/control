@@ -1,6 +1,6 @@
 # GitHub cutover evidence
 
-Date: 2026-07-28
+Date: 2026-07-29
 
 ## Actors
 
@@ -14,8 +14,8 @@ The current technical GitHub access is a single authenticated account:
 | Push actor | Levtos |
 | PR creator | Levtos |
 | Server-side merger | Levtos |
-| Workflow actor | not yet exercised by a release tag |
-| Release actor | not yet exercised by a release tag |
+| Workflow actor | not exercised by this cutover; next real stable release uses GitHub Actions |
+| Release actor | not exercised by this cutover; next real stable release uses GitHub Actions |
 
 The commit author is intentionally documented separately from the push, PR,
 merge, workflow, and release actors. No separate Claude or ChatGPT GitHub
@@ -32,13 +32,15 @@ by this cutover.
 - Pull requests: creation, readback, and server-side merge verified.
 - Actions: workflow definitions and existing releases readable.
 - Releases/tags: API access readable; no new release or tag created.
-- Project v2: blocked because the current token has only gist, read:org, repo,
-  and workflow scopes; read:project and project are missing. No OAuth refresh
-  or credential change was attempted.
+- Project: Project `Platform Workflow` is readable and writable as
+  `PVT_kwHOBbFWO84Beupq`, with 38 imported Issues and the documented fields and
+  views.
 - Branch protection: PUT succeeded for control and all 20 active integrations.
 - Local dirty worktrees: not touched. All cutover changes used fresh clones
   under .codex-worktrees/github-cutover-repos.
-- LXC 104, MCPHub, Home Assistant, GitLab, and LeanCTX: unchanged.
+- LXC 104, MCPHub, Home Assistant, and LeanCTX: outside this cutover and not
+  changed. GitLab repositories and their data remain intact; only the
+  GitLab-to-GitHub push-mirror enablement was changed as documented below.
 
 ## Foundation
 
@@ -94,5 +96,24 @@ agent-led server-side merge flow while preventing direct default-branch pushes.
 ## Release state
 
 No version, tag, or release was created by this foundation batch. The direct
-stable-release workflow is installed and must be exercised by the approved
-pilot only. Existing stable releases and prereleases were not changed.
+stable-release workflow is installed. An artificial release or HACS test is
+not required: previous platform work already exercised and verified GitHub
+Releases and HACS delivery. The next real, fachlich decided integration fix
+will use the direct GitHub release path as normal operational confirmation.
+An error in that run is handled in its GitHub Issue and does not by itself
+reinstate GitLab as the active platform. Existing stable releases and
+prereleases were not changed.
+
+## Mirror state
+
+The former active distribution bridge was the GitLab Remote Mirror API, not
+MCPHub itself. The 20 per-project mirror objects were disabled with
+`PUT /projects/:id/remote_mirrors/:mirror_id` and `enabled=false`; the mirror
+objects, target mappings, server-side credentials, GitLab repositories, tags,
+Issues, and releases were not deleted. The mirror IDs and project IDs are
+listed in `docs/operations/release-and-rollback.md`.
+
+All 20 mirrors read back as disabled after the operation. The
+`title-classifier` mirror retained a historical failed-status flag and a
+successful-last-run timestamp; its error text is intentionally not copied
+into repository documentation.
