@@ -13,6 +13,21 @@ possible. Producer and feeder changes are deployed before consumers.
 - Apply integrations execute decisions and do not rebuild domain truth.
 - UX clients consume typed snapshots/events and do not own backend logic.
 
+## Core Contracts transition
+
+Core Contracts is a separate Foundation integration. The verified current
+release is v0.1.1 and its current slice is read-only and Shadow-only: no
+public entities, services, actuation or policy imports. The future Published-
+Entity phase is an explicit allowlist and consumer-cutover decision, not an
+automatic migration of every old Core Devices ticket.
+
+The former Wiki atlas associated Opening and Lock Contracts with Core Devices.
+That is historical compatibility context. Activity State, the three-state
+Opening contract, Lock/Unlock semantics and the new U200 evidence must be
+reconciled against the current Core Contracts implementation before any
+consumer or public entity is switched. The active technical record is
+[benni-core-contracts#1](https://github.com/Levtos/benni-core-contracts/issues/1).
+
 ## Change requirements
 
 Before changing a contract, document the owner, consumers, owned attributes,

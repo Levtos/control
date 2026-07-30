@@ -9,7 +9,9 @@ URL and only sanitized, still-relevant decisions/evidence.
 | #64 | `Levtos/control` | in-progress / chore / Codex / Cross-Repo+Platform / Missing |
 | #51, #49, #32, #41, #18, #8, #16 | `Levtos/control` | preserve each source state; sanitize private targets |
 | #62, #55, #53, #52, #27 | `Levtos/Title_classifier` | preserve source metadata and live gates |
-| #57, #59 | `Levtos/benni-core-contracts` | Testing / feature / Codex / Platform / Missing or Tests Pass |
+| #57 | `Levtos/benni-core-contracts#1` | Foundation target and gates; Testing / feature / Codex / Platform / Missing |
+| #59 | `Levtos/benni-core-contracts#2` | UX acceptance; Testing / feature / Codex / Platform / Tests Pass |
+| #58 | `Levtos/control#17` plus `docs/adr/0001-ux-frontend-standard.md` | Binding decision / decision / Codex / Platform; docs and ADR |
 | #56, #5, #6, #13 | `Levtos/benni-core-devices` | preserve source metadata; do not infer priority |
 | #42 | private parents configuration reference | sanitize; keep private topology out |
 | #54 | `Levtos/stash-ha` | In Progress / feature / Codex / Benni / Live evidence requires review |
@@ -23,8 +25,9 @@ URL and only sanitized, still-relevant decisions/evidence.
 | #11 | `Levtos/benni_blind_policy` | preserve source metadata |
 
 The following remain historical or are consolidated rather than imported as
-separate active Issues: #60 into #62, #61 into #63, #17 into the UX ADR, #58
-into the UX ADR, and completed Issue #3 into durable documentation.
+separate active Issues: #60 into #62, #61 into #63, #17 into the UX ADR, and
+completed Issue #3 into durable documentation. The former GitLab Wiki is
+available as the sanitized versioned snapshot under `docs/wiki/`.
 
 Priority and Module are left unset when the GitLab evidence does not support
 them. The four status/evidence inconsistencies found in the audit must be
