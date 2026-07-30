@@ -37,6 +37,8 @@ keys, Plane exports, or operational datasets.
 - [Workflow](docs/workflow/README.md)
 - [Release workflow](docs/workflow/hacs-release-workflow.md)
 - [ADR index](docs/adr/README.md)
+- [UX standard](docs/ux/README.md)
+- [Wiki / Project Memory snapshot](docs/wiki/README.md)
 - [Issue migration mapping](docs/migration/issue-mapping.md)
 
 The `docs/` tree is the only canonical Project Memory. A future Pages site,

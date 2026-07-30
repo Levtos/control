@@ -10,6 +10,7 @@ GitLab Issue numbers are not reused as GitHub numbers.
 | #63 | [benni_media#7](https://github.com/Levtos/benni_media/issues/7) |
 | #55 | [Title_classifier#71](https://github.com/Levtos/Title_classifier/issues/71) |
 | #57 | [benni-core-contracts#1](https://github.com/Levtos/benni-core-contracts/issues/1) |
+| #58 | [control#17](https://github.com/Levtos/control/issues/17) and [ADR 0001](../adr/0001-ux-frontend-standard.md) |
 | #56 | [benni-core-devices#28](https://github.com/Levtos/benni-core-devices/issues/28) |
 | #42 | [einhornzentrale#17](https://github.com/Levtos/einhornzentrale/issues/17) |
 | #54 | [stash-ha#31](https://github.com/Levtos/stash-ha/issues/31) |
@@ -45,4 +46,10 @@ GitLab Issue numbers are not reused as GitHub numbers.
 | #59 | [benni-core-contracts#2](https://github.com/Levtos/benni-core-contracts/issues/2) |
 
 Consolidated historical items remain only as GitLab provenance: #60 into #62,
-#61 into #63, #17 and #58 into the UX ADR, and completed #3 into docs.
+#61 into #63, #17 into the UX ADR, and completed #3 into docs. The former Wiki
+pages are available as the sanitized, versioned snapshot under `docs/wiki/`;
+the test-only MCP page was intentionally excluded.
+
+GitLab #57 is represented by the full target and gate record in
+`Levtos/benni-core-contracts#1`; an older duplicate GitHub Issue is retained
+for provenance and must not become a second architecture source.
