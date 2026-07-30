@@ -25,3 +25,5 @@ Do not create a test, runner, or CI gate that is not required by the Issue.
 - [Project Memory](project-memory.md)
 - [Stable HACS releases](hacs-release-workflow.md)
 - [Verification](verification-and-efficiency.md)
+- [Agent orchestration](agent-orchestration.md)
+- [GitLab retirement checklist](../operations/gitlab-retirement.md)

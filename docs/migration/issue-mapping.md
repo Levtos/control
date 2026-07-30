@@ -29,6 +29,12 @@ separate active Issues: #60 into #62, #61 into #63, #17 into the UX ADR, and
 completed Issue #3 into durable documentation. The former GitLab Wiki is
 available as the sanitized versioned snapshot under `docs/wiki/`.
 
+GitLab #66 is consolidated into `Levtos/benni-core-contracts#1`, together with
+the target and live-gate record formerly tracked under #57. GitLab #64 and #65
+remain represented by the current GitHub workflow and cutover documentation;
+historical notes, attachments, runner records, and private artifacts are not
+claimed as fully imported.
+
 Priority and Module are left unset when the GitLab evidence does not support
 them. The four status/evidence inconsistencies found in the audit must be
 documented before any import is treated as complete.
