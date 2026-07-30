@@ -53,3 +53,10 @@ the test-only MCP page was intentionally excluded.
 GitLab #57 is represented by the full target and gate record in
 `Levtos/benni-core-contracts#1`; an older duplicate GitHub Issue is retained
 for provenance and must not become a second architecture source.
+
+GitLab #66 is represented by the same canonical
+`Levtos/benni-core-contracts#1` target record. GitLab #64 is preserved by
+`Levtos/control#1` and its workflow slices; GitLab #65 is historical cutover
+provenance for the GitHub-first operating model. This mapping does not claim
+that every historical note, attachment, runner record, or private artifact was
+imported.
