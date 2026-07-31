@@ -27,6 +27,7 @@ Do not create a test, runner, or CI gate that is not required by the Issue.
 - [Stable HACS releases](hacs-release-workflow.md)
 - [Verification](verification-and-efficiency.md)
 - [Agent orchestration](agent-orchestration.md)
+- [Codex bootstrap](codex-bootstrap.md)
 - [ADR 0002: GitHub-only governance](../adr/0002-github-only-governance.md)
 - [Repository registry and lifecycle](../operations/repositories.md)
 - [GitLab retirement checklist](../operations/gitlab-retirement.md)

@@ -34,6 +34,7 @@ keys, Plane exports, or operational datasets.
 - [Integration overview](docs/integrations/overview.md)
 - [Operations](docs/operations/repositories.md)
 - [Workflow](docs/workflow/README.md)
+- [Codex bootstrap](docs/workflow/codex-bootstrap.md)
 - [Release workflow](docs/workflow/hacs-release-workflow.md)
 - [ADR index](docs/adr/README.md)
 - [ADR 0002: GitHub-only governance](docs/adr/0002-github-only-governance.md)
