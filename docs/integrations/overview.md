@@ -1,8 +1,8 @@
 # Integrations overview
 
 The active public integration set is maintained under the `Levtos` GitHub
-account. The GitLab project names are retained only as provenance and archive
-references.
+account. Former platform names may occur only as non-authoritative migration
+provenance; they are not active sources, archives, or rollback targets.
 
 | Layer | Active repositories |
 |---|---|

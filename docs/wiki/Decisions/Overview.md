@@ -17,6 +17,7 @@ entschiedenes Arbeits-Issue ist die fachliche Freigabe.
 
 | ADR | Titel | Status | Aktives GitHub-Issue | Historische Quelle |
 |---|---|---|---|---|
+| [ADR 0002](../../adr/0002-github-only-governance.md) | GitHub-only Governance, Agenten-Workflow und Repository-Lebenszyklus | beschlossen | [control#21](https://github.com/Levtos/control/issues/21) | — |
 | [ADR 0001](../../adr/0001-ux-frontend-standard.md) | Einheitlicher UX-, Technologie- und Designstandard | angenommen und bindend | [control#17](https://github.com/Levtos/control/issues/17) | [GitLab control#58](https://gitlab.b-struck.de/ha-platform/control/-/work_items/58) |
 
 ADR 0001 legt die 19 nativen Backends, das statische Svelte-5-/Vite-Bundle,

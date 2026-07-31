@@ -1,9 +1,9 @@
 # Bereinigter Wiki-Snapshot
 
-Dieser Ordner überführt das dauerhafte Wissen aus dem GitLab-Wiki von
-ha-platform/control in die aktive GitHub-Projekt-Memory. GitHub ist die
-versionierte Arbeitsquelle; GitLab bleibt historische Referenz und
-Rollback-Archiv.
+Dieser Ordner ist ein bereinigter, navigierbarer Snapshot von früheren
+Projekt-Memory-Seiten. GitHub ist die einzige versionierte Arbeits- und
+Wissensquelle; ältere Plattformen bleiben höchstens nicht-normative Provenienz
+und sind keine Archive oder Rollback-Ziele.
 
 Der Snapshot wurde am 2026-07-30 aus den Wiki-Seiten und den zugehörigen
 Issues erstellt. Er ist bewusst bereinigt:

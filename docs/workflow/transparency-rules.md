@@ -5,8 +5,9 @@
   HACS evidence, risks, and rollback.
 - Never place secrets, tokens, private keys, passwords, live configuration,
   or unnecessary personal data in Issues, commits, logs, or documentation.
-- Keep historical GitLab provenance as links; do not copy irrelevant
-  comments or raw operational exports.
+- Keep any historical migration provenance as non-authoritative links; do not
+  treat it as a workflow, archive, or rollback source and do not copy
+  irrelevant comments or raw operational exports.
 - Do not close an Issue automatically through PR keywords. Keep Testing and
   Live gates explicit.
 - Do not delete historical Issues, repositories, tags, releases, or archive

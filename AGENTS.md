@@ -5,8 +5,9 @@
 - Benni is the product and live-system decision maker.
 - GitHub Issues and their comments record active decisions and work.
 - `control/docs/` is the single durable Project Memory.
-- GitLab is historical archive and rollback target only.
-- Plane and Forgejo are historical/out of service and must not be used.
+- GitHub is the only active and historical source for work, evidence, and
+  Project Memory. GitLab, Plane, and Forgejo are retired and are not valid
+  alternatives, archives, or rollback targets.
 - Home Assistant configuration, LXC 104, MCPHub, and LeanCTX are outside
   this repository's scope.
 
@@ -17,13 +18,19 @@
    specification before code work.
 3. Add the Issue to the `Platform Workflow` Project and set Status, Type,
    Priority, Owner, Scope, Evidence, and Module when known.
-4. Use one active implementation agent per Issue.
+4. Use exactly one active implementation agent per Issue; record the agent as
+   `agent:codex` or `agent:claude`.
 5. Work from a clean clone or isolated worktree at a verified default-branch
    SHA. Never overwrite a dirty checkout.
 6. Implement only the decided scope, test it, open a PR, inspect checks, and
    merge server-side.
 7. Record branch, commit, PR, merge SHA, tests, release, and risks on the
    Issue.
+
+ChatGPT prepares triage, evidence, architecture clarification, Issue quality,
+and review context, but does not make code, configuration, test, workflow,
+deployment, or live-system changes. The Issue agent owns the decided
+implementation scope; handoffs are explicit Issue notes, never parallel work.
 
 New unrelated findings become separate Issues. Do not make a product
 decision silently. Do not request a micro-approval for ordinary branch,
@@ -58,6 +65,8 @@ them to Issues, commits, logs, or files.
   unnecessary topology.
 - Read the matching Lastenheft in the private configuration repository before
   any functional Home Assistant behavior change.
+- CTX is the mandatory first local context step when available; its setup or
+  configuration is outside this repository.
 
 ## Tools
 

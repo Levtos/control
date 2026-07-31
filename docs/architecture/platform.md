@@ -41,8 +41,8 @@ Lock or Activity Contracts.
 
 ## Operational boundary
 
-GitHub is the active workflow and release platform. HACS consumes public
-GitHub repositories. GitLab is retained read-only as historical archive and
-rollback target until a separately verified archival decision. Home Assistant
-instances, LXC 104, MCPHub, and private configuration remain outside this
-repository.
+GitHub is the only active and historical workflow and release platform. HACS
+consumes public GitHub repositories. GitLab, Plane, and Forgejo are retired and
+are not valid alternatives, archives, or rollback targets; any migration links
+are provenance only. Home Assistant instances, LXC 104, MCPHub, and private
+configuration remain outside this repository.
