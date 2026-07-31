@@ -1,22 +1,22 @@
-# Claude bootstrap
+# Claude bootstrap: control
 
-- GitHub is the active source of truth for code, Issues, Projects, PRs,
-  Actions, releases, and HACS distribution.
-- GitHub is also the only historical source for work, evidence, and Project
-  Memory; GitLab, Plane, and Forgejo are not valid alternatives, archives, or
-  rollback targets.
-- Read the complete Issue and all comments before work; add it to the
-  `Platform Workflow` Project and set its known fields.
-- Benni decides product behavior. Do not invent behavior or expand scope.
-- ChatGPT remains read/review/assignment-only; exactly one Issue agent,
-  identified by `agent:codex` or `agent:claude`, performs implementation work.
-- Use a clean clone/worktree, a branch, a pull request, checks, and a
-  server-side merge. Never overwrite dirty worktrees.
-- Stable releases are standard. Pre-releases need Benni's explicit decision.
-- The release chain ends at the visible HACS update. Testing is not Live;
-  Live and Live Verified remain Benni's gate.
-- `control/docs/` is the only durable Project Memory; see ADR 0002 and the
-  workflow documentation for ownership, handoff, lifecycle, and live gates.
-- Keep private HA configuration, credentials, tokens, LXC 104, MCPHub, and
-  LeanCTX out of this repository.
-- Use `git`, `gh`, and `tools/github_workflow.py`; never output secrets.
+This is a durable, short repository bridge. The detailed and versioned
+governance lives only in
+[Levtos/control/docs/](https://github.com/Levtos/control/tree/main/docs).
+
+- Use CTX first when it is available.
+- Read this repository's `AGENTS.md`.
+- Read the complete GitHub Issue, all comments, labels, and Project fields.
+- Read ADR 0002, the relevant control/docs pages, and this repository's
+  matching specification before implementation.
+- GitHub is the only active and historical source.
+- Work under exactly one Issue agent, recorded as `agent:codex` or
+  `agent:claude`. Technical completion is not Live; Benni owns the Live gate.
+- For UX work, also follow ADR 0001 and `Levtos/control#17`.
+- Keep this file short; do not copy detailed governance rules into the
+  repository. Preserve only genuinely repository-specific HACS, release, or
+  runbook notes here when they are current and unique.
+
+Repository-specific: use `git`, `gh`, and `tools/github_workflow.py`, and keep
+private Home Assistant configuration, credentials, and topology out of this
+repository.
