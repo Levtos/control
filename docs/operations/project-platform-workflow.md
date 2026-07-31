@@ -34,10 +34,13 @@ The field IDs below are GitHub Project metadata, not credentials.
 
 ## Import rule
 
-The 38 Issues listed in `docs/migration/github-issue-mapping.md` were added
-to this Project. Status, Type, Owner, Scope, and Evidence were copied only
-from the corresponding GitHub Issue labels. Priority and Module were not
-inferred and remain unset.
+The imported Issues listed in `docs/migration/github-issue-mapping.md` were
+added to this Project. Status, Type, Owner, Scope, and Evidence were copied
+only from the corresponding GitHub Issue labels. Priority and Module were not
+inferred and remain unset unless an Issue now documents them explicitly.
+
+ADR 0002 is the binding rule for one active Issue agent, handoff, lifecycle
+status, and the separation of technical completion from Benni's Live gate.
 
 `Scope` is a single-select field. When an Issue has the explicitly evidenced
 `scope/cross-repo` label, the Project value is `Cross-Repo`; otherwise a

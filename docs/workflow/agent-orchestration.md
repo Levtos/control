@@ -13,14 +13,19 @@ behaviour, priorities, scope, and the final live verification gate.
 ChatGPT clarifies the problem with Benni, reads the responsible GitHub Issue and
 its linked documentation, separates evidenced actual state from hypotheses and
 desired state, evaluates technical evidence, and writes the complete
-implementation assignment after the product decision is clear. ChatGPT keeps
-Issues and durable project documentation current.
+implementation assignment after the product decision is clear. In the project
+folder ChatGPT is read/review/assignment-only: it does not make code,
+configuration, test, workflow, deployment, or live-system changes.
 
 Codex and Claude provide technical evidence and implement an already decided
 scope. They may identify contradictions, risks, or unknown dependencies, but do
 not decide the desired product state independently. A technical unknown is
 handled as a read-only evidence assignment, not as an implicit architecture
 decision.
+
+Exactly one of the two agents owns implementation for an Issue, recorded as
+`agent:codex` or `agent:claude`. This is per-Issue ownership, not a permanent
+repository lock; both agents may work in any active repository when assigned.
 
 ## Assignment types
 
@@ -41,6 +46,14 @@ merges server-side when authorized, verifies the resulting default-branch SHA,
 and records the result on the Issue. Mandatory scope-conforming follow-up work
 is part of the assignment. Stop only for a new product decision, material risk,
 or a blocker that cannot be resolved safely.
+
+### Handoff
+
+A handoff is a single explicit Issue update containing current Soll/Ist,
+branch/commit, changed files, tests, risks, open decisions, and the next step.
+The outgoing agent stops implementation before the incoming agent starts; the
+incoming agent verifies the state and takes the ownership label. There are no
+parallel implementations or competing solution branches for one Issue.
 
 ## Risk-based review
 
@@ -64,7 +77,7 @@ separate:
 
 Implementation starts only when no product decision remains open. Use the
 GitHub Issue and the Platform Workflow Project for current work; do not create
-an alternate board or resurrect retired Plane workflow.
+an alternate board or use retired platforms.
 
 ## Project Memory
 
@@ -79,9 +92,10 @@ documentation impact explicitly.
 
 ## GitHub, releases, and live gates
 
-GitHub is the active workflow and public distribution target. The former GitLab
-instance is a historical archive and rollback source during the retirement
-window; it is not a runtime dependency for normal development.
+GitHub is the only active and historical workflow, evidence, Project Memory,
+and public distribution source. GitLab, Plane, and Forgejo are retired and are
+not valid alternatives, archives, or rollback targets; migration links are
+non-authoritative provenance only.
 
 Repository-local tests and central GitHub release automation are separate
 layers. For HACS repositories, use the established GitHub Action and stable
@@ -104,3 +118,5 @@ cleanup or broad audits.
 - verification-and-efficiency.md — minimum verification by risk.
 - hacs-release-workflow.md — stable release path.
 - ../migration/issue-mapping.md — historical-to-current Issue mapping.
+- ../adr/0002-github-only-governance.md — binding governance decision.
+- ../operations/repositories.md — lifecycle statuses and registry.

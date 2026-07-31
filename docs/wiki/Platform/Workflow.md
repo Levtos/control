@@ -11,9 +11,9 @@ kompakte Arbeitsfassung und keine zweite Regelquelle.
   installierten Versionen und autorisierter Live-Beobachtung.
 - Konflikte werden nicht stillschweigend entschieden. Soll und Ist werden
   getrennt benannt, im Issue dokumentiert und gezielt angeglichen.
-- GitHub ist aktive Arbeits- und Release-Plattform. GitLab bleibt historisches
-  Archiv und Rollback-Ziel.
-- Plane und Forgejo sind außer Betrieb und keine aktive Quelle.
+- GitHub ist die einzige aktive und historische Arbeits-, Nachweis- und
+  Release-Plattform. GitLab, Plane und Forgejo sind retired und keine gültigen
+  Alternativen, Archive oder Rollback-Ziele.
 
 ## Rollen
 
@@ -22,6 +22,9 @@ kompakte Arbeitsfassung und keine zweite Regelquelle.
   trennt Ist, Hypothese und Soll und pflegt die dauerhaften Artefakte.
 - Codex und Claude liefern angeforderte technische Evidenz oder setzen einen
   bereits entschiedenen Soll-Zustand scope-konform um.
+- Pro Issue gibt es genau einen aktiven Agenten, festgelegt als `agent:codex`
+  oder `agent:claude`; die verbindliche Übergaberegel steht in
+  [docs/workflow/agent-orchestration.md](../../workflow/agent-orchestration.md).
 
 Technische Agenten entscheiden kein fachliches Soll eigenständig und bauen
 keine ungefragten Alternativen.

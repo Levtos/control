@@ -1,7 +1,7 @@
 # Home — Integration Atlas
 
-Dies ist die bereinigte GitHub-Fassung des früheren GitLab-Wiki-Einstiegs.
-Sie dient als kompaktes Projektgedächtnis für Architektur, Contracts,
+Dies ist eine bereinigte GitHub-Fassung des früheren Projekt-Memory-Einstiegs.
+Sie dient als kompaktes, nicht separat editierbares Projektgedächtnis für Architektur, Contracts,
 Integrationen, Entscheidungen und wiederkehrende Abläufe.
 
 ## Navigation
@@ -31,5 +31,5 @@ anschließend gezielt angeglichen.
 
 ## Herkunft
 
-Historische Quelle: GitLab Wiki von ha-platform/control, insbesondere die
-Pflege- und Atlas-Issues #31 und #32 sowie die UX-Entscheidung #58.
+Historische Provenienz: frühere Wiki- und Issue-Inhalte aus dem ehemaligen
+Plattformprojekt. Die aktuelle Arbeits- und Nachweisquelle ist GitHub.

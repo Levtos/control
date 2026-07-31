@@ -6,8 +6,9 @@ technical GitHub actor must be recorded independently for commit, push, PR,
 merge, workflow, and release; a cosmetic commit author is not sufficient.
 
 GitHub Issues and comments are active workflow evidence. `control/docs/` is
-the only durable Project Memory. GitLab remains historical archive and
-rollback target. Plane and Forgejo are not active sources.
+the only durable Project Memory. GitHub is the only active and historical
+source; GitLab, Plane, and Forgejo are retired and are not valid alternatives,
+archives, or rollback targets. See [ADR 0002](../adr/0002-github-only-governance.md).
 
 One Issue has one active implementation agent. Product uncertainty stops the
 work and becomes a decision; unrelated findings become new Issues. Benni does

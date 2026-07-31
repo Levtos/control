@@ -2,14 +2,15 @@
 
 ## Grundsatz
 
-GitHub ist die aktive Code-, Workflow- und HACS-Plattform. GitLab bleibt
-historisches Archiv und Rollback-Ziel. Forgejo ist außer Betrieb.
+GitHub ist die einzige aktive und historische Code-, Workflow- und HACS-
+Plattform. GitLab, Plane und Forgejo sind retired und keine gültigen
+Alternativen, Archive oder Rollback-Ziele.
 
 ## HACS-Release
 
 1. Änderung auf Branch umsetzen und Pull Request öffnen.
 2. Manifest-Version nach Scope bumpen.
-3. Den vorgesehenen Release- und Mirror-Weg aus dem Repository verwenden.
+3. Den vorgesehenen GitHub-Release-Weg aus dem Repository verwenden.
 4. CI, Tag, Release und aktuelle Main-SHA serverseitig verifizieren.
 5. Issue mit Tests, Risiken und verbleibendem Live-Gate aktualisieren.
 

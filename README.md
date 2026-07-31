@@ -5,11 +5,10 @@ repository for the active Home Assistant integrations.
 
 ## Platform decision
 
-GitHub is the primary platform for active code, Issues, Projects, pull
-requests, Actions, releases, and HACS distribution. GitLab remains an
-unchanged historical archive and rollback target at
-https://gitlab.b-struck.de/ha-platform/control until a later, separately
-verified archival decision.
+GitHub is the only active and historical source for code, Issues, Projects,
+pull requests, Actions, releases, HACS distribution, evidence, and Project
+Memory. GitLab, Plane, and Forgejo are retired and are not valid alternatives,
+archives, or rollback targets.
 
 The Home Assistant configuration repositories remain private. This
 repository contains no live configuration, secrets, credentials, private
@@ -37,6 +36,7 @@ keys, Plane exports, or operational datasets.
 - [Workflow](docs/workflow/README.md)
 - [Release workflow](docs/workflow/hacs-release-workflow.md)
 - [ADR index](docs/adr/README.md)
+- [ADR 0002: GitHub-only governance](docs/adr/0002-github-only-governance.md)
 - [UX standard](docs/ux/README.md)
 - [Wiki / Project Memory snapshot](docs/wiki/README.md)
 - [Issue migration mapping](docs/migration/issue-mapping.md)

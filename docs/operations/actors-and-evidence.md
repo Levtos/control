@@ -39,8 +39,8 @@ by this cutover.
 - Local dirty worktrees: not touched. All cutover changes used fresh clones
   under .codex-worktrees/github-cutover-repos.
 - LXC 104, MCPHub, Home Assistant, and LeanCTX: outside this cutover and not
-  changed. GitLab repositories and their data remain intact; only the
-  GitLab-to-GitHub push-mirror enablement was changed as documented below.
+  changed. The former GitLab mirror state is recorded below as one-time
+  cutover evidence only; it is not an active source, archive, or rollback path.
 
 ## Foundation
 
@@ -100,8 +100,8 @@ stable-release workflow is installed. An artificial release or HACS test is
 not required: previous platform work already exercised and verified GitHub
 Releases and HACS delivery. The next real, fachlich decided integration fix
 will use the direct GitHub release path as normal operational confirmation.
-An error in that run is handled in its GitHub Issue and does not by itself
-reinstate GitLab as the active platform. Existing stable releases and
+An error in that run is handled in its GitHub Issue and does not change the
+GitHub-only source-of-truth decision. Existing stable releases and
 prereleases were not changed.
 
 ## Mirror state
