@@ -13,18 +13,25 @@
 
 ## Issue-first flow
 
-1. Read the complete Issue description and all comments.
-2. Read relevant `control/docs/`, repository rules, and any functional
-   specification before code work.
-3. Add the Issue to the `Platform Workflow` Project and set Status, Type,
-   Priority, Owner, Scope, Evidence, and Module when known.
-4. Use exactly one active implementation agent per Issue; record the agent as
+Before local technical work, use CTX as the first context step when it is
+available in the local environment. If it is unavailable, record that fact and
+continue without silently treating its absence as evidence. Installing or
+reconfiguring CTX is not part of an unrelated Issue.
+
+1. Classify the assignment as read-only evidence, architecture/decision
+   clarification, or implementation of an already decided scope.
+2. Read the complete Issue description and all comments.
+3. Read relevant `control/docs/`, repository rules, Project fields, and any
+   functional specification before technical work.
+4. Add the Issue to the `Platform Workflow` Project and set Status, Type,
+   Priority, Owner, Scope, Evidence, and Module only when known from evidence.
+5. Use exactly one active implementation agent per Issue; record the agent as
    `agent:codex` or `agent:claude`.
-5. Work from a clean clone or isolated worktree at a verified default-branch
+6. Work from a clean clone or isolated worktree at a verified default-branch
    SHA. Never overwrite a dirty checkout.
-6. Implement only the decided scope, test it, open a PR, inspect checks, and
-   merge server-side.
-7. Record branch, commit, PR, merge SHA, tests, release, and risks on the
+7. Implement only the decided scope, test it, open a PR, inspect checks, and
+   merge server-side when the Issue assignment authorizes that flow.
+8. Record branch, commit, PR, merge SHA, tests, release, and risks on the
    Issue.
 
 ChatGPT prepares triage, evidence, architecture clarification, Issue quality,
@@ -32,9 +39,37 @@ and review context, but does not make code, configuration, test, workflow,
 deployment, or live-system changes. The Issue agent owns the decided
 implementation scope; handoffs are explicit Issue notes, never parallel work.
 
-New unrelated findings become separate Issues. Do not make a product
-decision silently. Do not request a micro-approval for ordinary branch,
-commit, PR, merge, tag, or release operations covered by the Issue decision.
+New unrelated findings become separate Issues. Do not make a product decision
+silently. Do not request a micro-approval for ordinary branch, commit, PR,
+merge, tag, or release operations covered by the Issue decision.
+
+## Decision and evidence discipline
+
+Keep these layers separate in every Issue note and handoff:
+
+- observation and timestamped episode;
+- evidenced technical actual state;
+- Benni's decided functional target state;
+- implementation and changed files;
+- tests and other technical verification;
+- risks, blockers, and remaining decisions;
+- Live and Live Verified evidence.
+
+Technical evidence may expose contradictions, risks, or unknown dependencies,
+but it does not choose the desired product state. If a product decision is
+missing, stop the affected scope and record the question in the Issue.
+
+Never silently turn uncertainty into a physical or product truth. Values such as
+`unknown`, `unavailable`, `stale`, `suspect`, `restored`,
+`source_conflict`, `provisional`, and `inferred` remain visible and
+diagnosable. `fallback=reject` means that no replacement value is invented.
+A safety consumer may conservatively block an action, but that does not change
+the reported physical state.
+
+Priorities, blockers, recovery, and resume behavior remain owned by their
+domain. Do not introduce a global priority stack or simplify an existing
+domain-specific path merely to make the workflow easier to describe. Preserve
+decided existing behavior unless the Issue explicitly changes it.
 
 ## Identity and audit
 
@@ -65,8 +100,21 @@ them to Issues, commits, logs, or files.
   unnecessary topology.
 - Read the matching Lastenheft in the private configuration repository before
   any functional Home Assistant behavior change.
-- CTX is the mandatory first local context step when available; its setup or
-  configuration is outside this repository.
+- Technical completion, Tests Pass, and a successful release do not establish
+  Live or Live Verified. Those remain Bennis gate.
+
+## Handoffs and documentation
+
+A handoff must contain the current Ist/Soll separation, branch and commit,
+changed files, tests, risks, open decisions or gates, and the next step. The
+incoming agent reads and confirms the handoff before starting.
+
+Stable, reusable process and architecture rules belong in `control/docs/`.
+Concrete incidents, raw logs, hypotheses, rejected variants, and intermediate
+states remain on the Issue. Feature-repository `AGENTS.md` files stay short
+and point to the canonical bootstrap and `control/docs/`; they do not copy
+domain implementation rules. LeanCTX mirrors this same process bridge in its
+external configuration.
 
 ## Tools
 
