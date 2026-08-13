@@ -121,6 +121,14 @@ them to Issues, commits, logs, or files.
 - Keep the Issue at Testing until live behavior is verified. Only Benni
   moves work to Live / Live Verified.
 
+## Local Completion Contract
+
+- For this repository, complete the technical chain with focused repository
+  checks → pull request → server-side merge → stable release/tag through the
+  existing repository workflow when this repository publishes a release.
+- Live installation, reload, restart, and Live/Live-Verified verification
+  remain a separate user/Benni gate.
+
 ## Testing and safety
 
 - Repository-local tests and central release automation are separate layers.
