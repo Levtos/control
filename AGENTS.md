@@ -43,6 +43,38 @@ New unrelated findings become separate Issues. Do not make a product decision
 silently. Do not request a micro-approval for ordinary branch, commit, PR,
 merge, tag, or release operations covered by the Issue decision.
 
+## Canonical Issue contract
+
+Reading an Issue and all comments is necessary but not sufficient when history,
+technical evidence, rejected variants, and the current target are mixed
+together. Every relevant implementation or cross-thread handoff must therefore
+have an **Aktueller verbindlicher Vertrag** section near the top of the Issue
+body.
+
+That section contains only the currently valid target state and explicitly
+supersedes older intermediate states. Historical comments remain the audit
+trail; when a later decision replaces one, mark the old statement
+`superseded`/überholt rather than silently deleting it.
+
+For stateful logic, acceptance criteria must name the relevant states,
+transitions, owning domain or repository, authoritative source, and expected
+result. Before coding or other implementation, the incoming agent records a
+short Ist-/Soll-Abgleich against the canonical contract. Tests verify the
+implemented interpretation; they do not replace a missing product decision.
+
+For cross-thread work, carry every explicitly linked Issue, PR, specification,
+and decision into the active work item and implementation prompt. In particular,
+work on [`benni_media_state#21`](https://github.com/Levtos/benni_media_state/issues/21)
+must explicitly read and link
+[`control#28`](https://github.com/Levtos/control/issues/28) and
+[control PR #39](https://github.com/Levtos/control/pull/39). This reference
+must remain visible in the handoff so the receiving agent cannot lose the
+cross-repository gate.
+
+A completion note records the contract actually implemented, changed files,
+branch/commit/PR, tests, untouched areas, risks, remaining decisions, and
+Live/Live-Verified gates.
+
 ## Decision and evidence discipline
 
 Keep these layers separate in every Issue note and handoff:

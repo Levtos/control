@@ -13,19 +13,34 @@ files link here; they do not copy the detailed governance in `control/docs/`.
    the matching specification before technical work.
 5. Treat GitHub as the only active and historical work, evidence, and memory
    source.
-6. Keep observation, evidenced Ist, decided Soll, implementation, tests,
+6. Confirm that the Issue contains an **Aktueller verbindlicher Vertrag**
+   section near the top. It is the current target and explicitly supersedes
+   older intermediate states; historical comments remain audit evidence and
+   are marked `superseded`/überholt when replaced.
+7. For stateful logic, verify that acceptance criteria name states,
+   transitions, owner domain/repository, authoritative source, and expected
+   results.
+8. Keep observation, evidenced Ist, decided Soll, implementation, tests,
    risks, open gates, and Live evidence separate.
-7. Never invent a product decision or silently replace uncertainty. Preserve
-   `unknown`, `unavailable`, `stale`, `source_conflict`, and
-   `fallback=reject` as visible diagnostic outcomes.
-8. Keep domain priorities, blockers, recovery, and existing paths
-   domain-specific; do not create a global replacement stack.
-9. Work under exactly one Issue agent, recorded as `agent:codex` or
-   `agent:claude`. Codex is the current default for new or explicitly
-   reassigned work; Claude is an explicit per-Issue exception.
-10. Technical completion and Tests Pass are not Live. Benni owns Live and
+9. Before implementation, write a short Ist-/Soll-Abgleich against the
+   canonical contract. If the target is missing or ambiguous, stop and record
+   the product question in the Issue.
+10. Carry explicitly linked cross-thread Issues, PRs, specifications, and
+    decisions into the active prompt and handoff. Work on
+    [`benni_media_state#21`](https://github.com/Levtos/benni_media_state/issues/21)
+    must explicitly include [`control#28`](https://github.com/Levtos/control/issues/28)
+    and [control PR #39](https://github.com/Levtos/control/pull/39).
+11. Never invent a product decision or silently replace uncertainty. Preserve
+    `unknown`, `unavailable`, `stale`, `source_conflict`, and
+    `fallback=reject` as visible diagnostic outcomes.
+12. Keep domain priorities, blockers, recovery, and existing paths
+    domain-specific; do not create a global replacement stack.
+13. Work under exactly one Issue agent, recorded as `agent:codex` or
+    `agent:claude`. Codex is the current default for new or explicitly
+    reassigned work; Claude is an explicit per-Issue exception.
+14. Technical completion and Tests Pass are not Live. Benni owns Live and
     Live Verified.
-11. Keep local bridges short and repository-specific; do not duplicate
+15. Keep local bridges short and repository-specific; do not duplicate
     detailed governance or feature logic in integration repositories.
 
 The Issue records the current scope, decisions, tests, PRs, risks, handoff, and
