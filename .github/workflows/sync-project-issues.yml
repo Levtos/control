@@ -17,14 +17,15 @@ jobs:
       - name: Sync issues
         env:
           GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
-          OWNER: Levtos
+          PROJECT_OWNER: "@me"
+          REPO_OWNER: Levtos
           PROJECT_TITLE: Platform Workflow
         shell: bash
         run: |
           set -euo pipefail
 
           PROJECT_NUMBER=$(
-            gh project list --owner "$OWNER" --limit 100 --format json |
+            gh project list --owner "$PROJECT_OWNER" --limit 100 --format json |
               jq -r --arg title "$PROJECT_TITLE" \
                 '.projects[] | select(.title == $title) | .number' |
               head -n 1
@@ -39,7 +40,7 @@ jobs:
 
           already=$(
             gh project item-list "$PROJECT_NUMBER" \
-              --owner "$OWNER" \
+              --owner "$PROJECT_OWNER" \
               --limit 1000 \
               --format json |
               jq -r '.items[] | select(.content.type=="Issue") | .content.url'
@@ -47,7 +48,7 @@ jobs:
 
           all_issues=$(
             gh search issues \
-              --owner "$OWNER" \
+              --owner "$REPO_OWNER" \
               --state open \
               --limit 1000 \
               --json url \
@@ -73,7 +74,7 @@ jobs:
             echo "Adding $url"
 
             gh project item-add "$PROJECT_NUMBER" \
-              --owner "$OWNER" \
+              --owner "$PROJECT_OWNER" \
               --url "$url"
           done <<< "$to_add"
 
