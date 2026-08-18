@@ -1,0 +1,80 @@
+name: Sync issues to Platform Workflow
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Sync issues
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
+          OWNER: Levtos
+          PROJECT_TITLE: Platform Workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PROJECT_NUMBER=$(
+            gh project list --owner "$OWNER" --limit 100 --format json |
+              jq -r --arg title "$PROJECT_TITLE" \
+                '.projects[] | select(.title == $title) | .number' |
+              head -n 1
+          )
+
+          if [[ -z "$PROJECT_NUMBER" || "$PROJECT_NUMBER" == "null" ]]; then
+            echo "Project '$PROJECT_TITLE' not found."
+            exit 1
+          fi
+
+          echo "Using project '$PROJECT_TITLE' (#$PROJECT_NUMBER)"
+
+          already=$(
+            gh project item-list "$PROJECT_NUMBER" \
+              --owner "$OWNER" \
+              --limit 1000 \
+              --format json |
+              jq -r '.items[] | select(.content.type=="Issue") | .content.url'
+          )
+
+          all_issues=$(
+            gh search issues \
+              --owner "$OWNER" \
+              --state open \
+              --limit 1000 \
+              --json url \
+              --jq '.[].url'
+          )
+
+          to_add=$(
+            comm -13 \
+              <(printf "%s\n" "$already" | grep '^https://' | sort -u) \
+              <(printf "%s\n" "$all_issues" | grep '^https://' | sort -u)
+          )
+
+          count=$(printf "%s\n" "$to_add" | grep -c '^https://' || true)
+
+          if [[ "$count" -eq 0 ]]; then
+            echo "No new issues."
+            exit 0
+          fi
+
+          while IFS= read -r url; do
+            [[ -z "$url" ]] && continue
+
+            echo "Adding $url"
+
+            gh project item-add "$PROJECT_NUMBER" \
+              --owner "$OWNER" \
+              --url "$url"
+          done <<< "$to_add"
+
+          echo "Added $count issue(s)."
