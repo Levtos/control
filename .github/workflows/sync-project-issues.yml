@@ -3,7 +3,6 @@ name: Sync issues to Platform Workflow
 on:
   schedule:
     - cron: "*/10 * * * *"
-
   workflow_dispatch:
 
 jobs:
@@ -17,65 +16,143 @@ jobs:
       - name: Sync issues
         env:
           GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
-          PROJECT_OWNER: "@me"
           REPO_OWNER: Levtos
           PROJECT_TITLE: Platform Workflow
         shell: bash
         run: |
           set -euo pipefail
 
-          PROJECT_NUMBER=$(
-            gh project list --owner "$PROJECT_OWNER" --limit 100 --format json |
-              jq -r --arg title "$PROJECT_TITLE" \
-                '.projects[] | select(.title == $title) | .number' |
-              head -n 1
+          echo "Step 1: Resolve personal project via GraphQL..."
+
+          project_json=$(
+            gh api graphql -f query='query {
+              viewer {
+                login
+                projectsV2(first: 100) {
+                  nodes {
+                    id
+                    number
+                    title
+                  }
+                }
+              }
+            }'
           )
 
-          if [[ -z "$PROJECT_NUMBER" || "$PROJECT_NUMBER" == "null" ]]; then
-            echo "Project '$PROJECT_TITLE' not found."
+          VIEWER=$(jq -r '.data.viewer.login' <<< "$project_json")
+          PROJECT_ID=$(
+            jq -r --arg title "$PROJECT_TITLE" \
+              '.data.viewer.projectsV2.nodes[] | select(.title == $title) | .id' \
+              <<< "$project_json" | head -n 1
+          )
+          PROJECT_NUMBER=$(
+            jq -r --arg title "$PROJECT_TITLE" \
+              '.data.viewer.projectsV2.nodes[] | select(.title == $title) | .number' \
+              <<< "$project_json" | head -n 1
+          )
+
+          if [[ -z "$PROJECT_ID" || "$PROJECT_ID" == "null" || -z "$PROJECT_NUMBER" || "$PROJECT_NUMBER" == "null" ]]; then
+            echo "ERROR: Personal project '$PROJECT_TITLE' was not found for authenticated user '$VIEWER'."
             exit 1
           fi
 
-          echo "Using project '$PROJECT_TITLE' (#$PROJECT_NUMBER)"
+          echo "Authenticated as: $VIEWER"
+          echo "Using project: $PROJECT_TITLE (#$PROJECT_NUMBER)"
+          echo ""
+
+          echo "Step 2: Get issues already in the project..."
 
           already=$(
-            gh project item-list "$PROJECT_NUMBER" \
-              --owner "$PROJECT_OWNER" \
-              --limit 1000 \
-              --format json |
-              jq -r '.items[] | select(.content.type=="Issue") | .content.url'
+            gh api graphql --paginate \
+              -F number="$PROJECT_NUMBER" \
+              -f query='query($number: Int!, $endCursor: String) {
+                viewer {
+                  projectV2(number: $number) {
+                    items(first: 100, after: $endCursor) {
+                      nodes {
+                        content {
+                          __typename
+                          ... on Issue {
+                            url
+                          }
+                        }
+                      }
+                      pageInfo {
+                        hasNextPage
+                        endCursor
+                      }
+                    }
+                  }
+                }
+              }' \
+              --jq '.data.viewer.projectV2.items.nodes[] | select(.content.__typename == "Issue") | .content.url'
           )
 
-          all_issues=$(
+          already_count=$(printf "%s\n" "$already" | grep -c '^https://' || true)
+          echo "Found $already_count issue(s) already in the project."
+          echo ""
+
+          echo "Step 3: Get all open issues owned by $REPO_OWNER..."
+
+          all_issues_json=$(
             gh search issues \
               --owner "$REPO_OWNER" \
               --state open \
               --limit 1000 \
-              --json url \
-              --jq '.[].url'
+              --json id,url
           )
+
+          all_issues=$(jq -r '.[].url' <<< "$all_issues_json")
+          all_issues_count=$(printf "%s\n" "$all_issues" | grep -c '^https://' || true)
+          echo "Found $all_issues_count open issue(s)."
+          echo ""
+
+          echo "Step 4: Calculate missing issues..."
 
           to_add=$(
             comm -13 \
-              <(printf "%s\n" "$already" | grep '^https://' | sort -u) \
-              <(printf "%s\n" "$all_issues" | grep '^https://' | sort -u)
+              <(printf "%s\n" "$already" | grep '^https://' | sort -u || true) \
+              <(printf "%s\n" "$all_issues" | grep '^https://' | sort -u || true)
           )
 
-          count=$(printf "%s\n" "$to_add" | grep -c '^https://' || true)
+          to_add_count=$(printf "%s\n" "$to_add" | grep -c '^https://' || true)
+          echo "Found $to_add_count issue(s) to add."
+          echo ""
 
-          if [[ "$count" -eq 0 ]]; then
-            echo "No new issues."
+          if [[ "$to_add_count" -eq 0 ]]; then
+            echo "Everything is already synced."
             exit 0
           fi
+
+          echo "Step 5: Add missing issues..."
 
           while IFS= read -r url; do
             [[ -z "$url" ]] && continue
 
+            content_id=$(
+              jq -r --arg url "$url" \
+                '.[] | select(.url == $url) | .id' \
+                <<< "$all_issues_json" | head -n 1
+            )
+
+            if [[ -z "$content_id" || "$content_id" == "null" ]]; then
+              echo "ERROR: Could not resolve node ID for $url"
+              exit 1
+            fi
+
             echo "Adding $url"
 
-            gh project item-add "$PROJECT_NUMBER" \
-              --owner "$PROJECT_OWNER" \
-              --url "$url"
+            gh api graphql \
+              -f project="$PROJECT_ID" \
+              -f content="$content_id" \
+              -f query='mutation($project: ID!, $content: ID!) {
+                addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
+                  item {
+                    id
+                  }
+                }
+              }' >/dev/null
           done <<< "$to_add"
 
-          echo "Added $count issue(s)."
+          echo ""
+          echo "Done. Added $to_add_count issue(s) to '$PROJECT_TITLE'."
