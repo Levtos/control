@@ -43,5 +43,39 @@ files link here; they do not copy the detailed governance in `control/docs/`.
 15. Keep local bridges short and repository-specific; do not duplicate
     detailed governance or feature logic in integration repositories.
 
+## Mandatory HACS implementation closeout
+
+For every decided implementation assignment in a Home Assistant/HACS
+integration, the same assignment includes the complete technical chain:
+
+1. run focused tests and review the scope and diff;
+2. open the pull request, including the stable version bump required by the
+   repository rules;
+3. inspect the checks and merge the pull request server-side;
+4. verify the resulting default-branch SHA;
+5. create the matching stable `vX.Y.Z` tag through the repository's approved
+   path and wait for the existing release automation;
+6. verify the normal, non-draft, non-prerelease GitHub Release and the HACS
+   visibility or equivalent release evidence;
+7. hand the work over in `Testing` with commit, pull request, merge SHA,
+   checks, release, HACS evidence, risks, and the remaining Live gate.
+
+There is no separate follow-up assignment or additional Benni approval gate
+between pull request, merge, tag, and release. An agent may stop before merge
+or release only when the assignment is explicitly read-only, an audit,
+planning, or decision clarification; a concrete technical or product blocker
+exists; checks fail; Benni explicitly stops that assignment before merge or
+release; or a repository rule requires an additional explicit approval. The
+blocker and the incomplete steps must be recorded; general caution alone is
+not a blocker.
+
+Merge, tag, GitHub Release, and HACS visibility are technical prerequisites
+for Benni's test. They are not a HACS installation, Home Assistant deployment,
+reload, restart, `Live`, or `Live Verified`. Benni owns those later gates.
+
+This rule implements the original process decision in
+[control#15](https://github.com/Levtos/control/issues/15) and its bootstrap
+clarification in [control#50](https://github.com/Levtos/control/issues/50).
+
 The Issue records the current scope, decisions, tests, PRs, risks, handoff, and
 remaining Live gate. Benni owns the final Live verification.
