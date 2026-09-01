@@ -19,6 +19,15 @@
 Repository-local tests and central release automation are separate layers.
 Do not create a test, runner, or CI gate that is not required by the Issue.
 
+For decided Home Assistant/HACS integration implementations, steps 7 through
+11 are one mandatory technical closeout in the same assignment. An agent may
+stop before merge or release only for the documented exceptions in the
+[Codex bootstrap](codex-bootstrap.md#mandatory-hacs-implementation-closeout)
+and [stable HACS release workflow](hacs-release-workflow.md). Merge and release
+remain separate from installation, deployment, `Live`, and `Live Verified`.
+The original process decision is recorded in
+[control#15](https://github.com/Levtos/control/issues/15).
+
 ## Documents
 
 - [Operating model](operating-model.md)

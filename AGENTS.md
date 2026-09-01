@@ -30,7 +30,8 @@ reconfiguring CTX is not part of an unrelated Issue.
 6. Work from a clean clone or isolated worktree at a verified default-branch
    SHA. Never overwrite a dirty checkout.
 7. Implement only the decided scope, test it, open a PR, inspect checks, and
-   merge server-side when the Issue assignment authorizes that flow.
+   complete the mandatory server-side merge and release flow described below
+   when the Issue is a decided Home Assistant/HACS implementation assignment.
 8. Record branch, commit, PR, merge SHA, tests, release, and risks on the
    Issue.
 
@@ -112,6 +113,18 @@ them to Issues, commits, logs, or files.
 
 ## Releases and HACS
 
+- A decided Home Assistant/HACS integration implementation includes focused
+  tests and review, pull request, server-side merge, verified default-branch
+  SHA, the repository-compliant stable version/tag, the normal GitHub Release
+  from existing automation, HACS visibility or equivalent release evidence,
+  and handover in `Testing` in the same assignment. This is the process
+  decision from [control#15](https://github.com/Levtos/control/issues/15),
+  clarified by [control#50](https://github.com/Levtos/control/issues/50).
+- Do not stop before merge or release merely as a precaution. A stop is valid
+  only for an explicitly read-only, audit, planning, or decision assignment;
+  a concrete technical or product blocker; failed checks; an explicit Benni
+  stop for that assignment; or a repository rule requiring additional
+  approval. Record the blocker and every incomplete step.
 - Stable `vX.Y.Z` releases are standard.
 - Alpha, beta, RC, and other pre-releases require Benni's explicit decision.
 - A tag must match the manifest version without the leading `v`.
@@ -123,11 +136,14 @@ them to Issues, commits, logs, or files.
 
 ## Local Completion Contract
 
-- For this repository, complete the technical chain with focused repository
-  checks → pull request → server-side merge → stable release/tag through the
-  existing repository workflow when this repository publishes a release.
-- Live installation, reload, restart, and Live/Live-Verified verification
-  remain a separate user/Benni gate.
+- For this repository, complete focused repository checks, pull request, and
+  server-side merge. Use a stable release/tag through the existing repository
+  workflow only when this repository publishes a release or the Issue requires
+  one; documentation-only governance changes in `control` do not create a HACS
+  release.
+- Merge, tag, GitHub Release, and HACS evidence are not installation or
+  deployment. Live installation, Home Assistant reload or restart, and
+  Live/Live-Verified verification remain a separate user/Benni gate.
 
 ## Testing and safety
 
